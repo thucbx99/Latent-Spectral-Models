@@ -1,5 +1,6 @@
 from models import LSM_2D, LSM_3D, LSM_Irregular_Geo, FNO_2D, FNO_3D, FNO_Irregular_Geo
 
+
 def get_model(args):
     model_dict = {
         'FNO_2D': FNO_2D,

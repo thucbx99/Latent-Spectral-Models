@@ -1,4 +1,6 @@
 import argparse
+
+
 def get_args():
     parser = argparse.ArgumentParser('Latent Spectral Models', add_help=False)
     # dataset

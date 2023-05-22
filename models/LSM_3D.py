@@ -75,7 +75,6 @@ class OutConv(nn.Module):
         return self.conv(x)
 
 
-
 ################################################################
 # Patchify and Neural Spectral Block
 ################################################################
@@ -141,11 +140,13 @@ class NeuralSpectralBlock2d(nn.Module):
         B, C, H, W, T = x.shape
         # patchify
         x = x.view(x.shape[0], x.shape[1],
-                   x.shape[2] // self.patch_size[0], self.patch_size[0], x.shape[3] // self.patch_size[1], self.patch_size[1],
+                   x.shape[2] // self.patch_size[0], self.patch_size[0], x.shape[3] // self.patch_size[1],
+                   self.patch_size[1],
                    x.shape[4] // self.patch_size[2], self.patch_size[2]).contiguous() \
             .permute(0, 2, 4, 6, 1, 3, 5, 7).contiguous() \
             .view(x.shape[0] * (x.shape[2] // self.patch_size[0]) * (x.shape[3] // self.patch_size[1]) * (
-                x.shape[4] // self.patch_size[2]), x.shape[1], self.patch_size[0], self.patch_size[1], self.patch_size[2])
+                x.shape[4] // self.patch_size[2]), x.shape[1], self.patch_size[0], self.patch_size[1],
+                  self.patch_size[2])
         # Neural Spectral
         # (1) encoder
         latent_token = self.latent_encoder_attn(x)
@@ -156,7 +157,8 @@ class NeuralSpectralBlock2d(nn.Module):
         x = self.latent_decoder_attn(x, latent_token)
         # de-patchify
         x = x.view(B, (H // self.patch_size[0]), (W // self.patch_size[1]), (T // self.patch_size[2]), C,
-                   self.patch_size[0], self.patch_size[1], self.patch_size[2]).permute(0, 4, 1, 5, 2, 6, 3, 7).contiguous() \
+                   self.patch_size[0], self.patch_size[1], self.patch_size[2]).permute(0, 4, 1, 5, 2, 6, 3,
+                                                                                       7).contiguous() \
             .view(B, C, H, W, T).contiguous()
         return x
 
