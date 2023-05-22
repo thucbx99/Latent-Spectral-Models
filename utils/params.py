@@ -16,8 +16,8 @@ def get_args():
                         help='input data time points (only for temporal related experiments)')
     parser.add_argument('--T-out', default=10, type=int,
                         help='predict data time points (only for temporal related experiments)')
-    parser.add_argument('--h-down', default=1, type=int, help='height downsampe rate of input')
-    parser.add_argument('--w-down', default=1, type=int, help='width downsampe rate of input')
+    parser.add_argument('--h-down', default=1, type=int, help='height down-sample rate of input')
+    parser.add_argument('--w-down', default=1, type=int, help='width down-sample rate of input')
 
     # optimization
     parser.add_argument('--batch-size', default=20, type=int, help='batch size of training')
@@ -26,7 +26,7 @@ def get_args():
     parser.add_argument('--step-size', default=100, type=int, help='interval of model save')
     parser.add_argument('--gamma', default=0.5, type=float, help='parameter of learning rate scheduler')
 
-    # Model parameters
+    # model parameters
     parser.add_argument('--model', default='lsm', type=str, help='model name')
     parser.add_argument('--d-model', default=32, type=int, help='channels of hidden variates')
     parser.add_argument('--num-basis', default=12, type=int, help='number of basis operators')
