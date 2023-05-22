@@ -97,12 +97,12 @@ class NeuralSpectralBlock2d(nn.Module):
         self.modes_list = (1.0 / float(num_basis)) * torch.tensor([i for i in range(num_basis)],
                                                                   dtype=torch.float).cuda()
         self.weights = nn.Parameter(
-            (1 / (width)) * torch.rand(width, self.num_basis * 2, dtype=torch.float))
+            (1 / width) * torch.rand(width, self.num_basis * 2, dtype=torch.float))
         # latent
         self.head = 8
         self.num_token = num_token
         self.latent = nn.Parameter(
-            (1 / (width)) * torch.rand(self.head, self.num_token, width // self.head, dtype=torch.float))
+            (1 / width) * torch.rand(self.head, self.num_token, width // self.head, dtype=torch.float))
         self.encoder_attn = nn.Conv2d(self.width, self.width * 2, kernel_size=1, stride=1)
         self.decoder_attn = nn.Conv2d(self.width, self.width, kernel_size=1, stride=1)
         self.softmax = nn.Softmax(dim=-1)
