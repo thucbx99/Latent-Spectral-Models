@@ -172,7 +172,7 @@ class LpLoss(object):
     def __init__(self, d=2, p=2, size_average=True, reduction=True):
         super(LpLoss, self).__init__()
 
-        # Dimension and Lp-norm type are postive
+        # Dimension and Lp-norm type are positive
         assert d > 0 and p > 0
 
         self.d = d
